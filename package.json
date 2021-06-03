@@ -5,6 +5,9 @@
   "repository": "git@github.com:calebgregory/native-mobile-app-webview-experiments.git",
   "author": "Caleb Gregory <calebgregory@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "prepare": "husky install"
+  },
   "devDependencies": {
     "eslint": "^7.14.0",
     "eslint-plugin-import": "^2.22.1",
