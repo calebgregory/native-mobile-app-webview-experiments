@@ -1,0 +1,9 @@
+#!/bin/bash
+
+aws s3 website "s3://${S3_BUCKET_NAME}" --index-document index.html
+
+aws s3api put-public-access-block \
+    --bucket "${S3_BUCKET_NAME}" \
+    --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false" \
+    >/dev/null \
+    && echo 'made bucket public'

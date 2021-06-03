@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "(>'')> you gave me nothing to run"
+  exit 1
+fi
+
+DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+export DIR
+
+if [ ! -f "${DIR}/$1" ]; then
+  echo "(>'')> what you gave me to run does not exist?"
+  exit 1
+fi
+
+# shellcheck disable=SC1091
+source "${DIR}/exports"
+
+echo "(>'')> running $1 $*"
+bash "${DIR}/$1" "$@"

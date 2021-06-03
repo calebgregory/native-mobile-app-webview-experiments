@@ -1,0 +1,81 @@
+root: true
+
+extends:
+  - '@react-native-community'
+
+plugins:
+  - react
+  - import
+
+globals:
+  fetch: false
+  __DEV__: readonly
+
+env:
+  jest: true
+
+rules:
+  # React Rules
+  react/prop-types: 0
+  react/no-unused-prop-types: 0
+  react/no-unused-state: 0
+  react/prefer-stateless-function: 2
+  react/forbid-prop-types: [0, { forbid: [] }]
+  react/require-default-props: off
+  react/jsx-sort-props:
+    - error
+    - callbacksLast: true
+      shorthandFirst: true
+      shorthandLast: false
+      ignoreCase: false
+      noSortAlphabetically: false
+      reservedFirst: true
+
+  # React-Native Rules
+  react-native/no-unused-styles: 2
+  react-native/split-platform-components: 2
+  react-native/no-inline-styles: 2
+  react-native/no-raw-text: 0
+
+  # Import Rules
+  import/extensions:
+    - 1
+    - never
+    - svg: always
+      json: always
+  import/no-extraneous-dependencies:
+    - error
+    - devDependencies: true
+      optionalDependencies: false
+      peerDependencies: false
+  import/prefer-default-export: off
+  implicit-arrow-linebreak: off
+
+  # General Rules
+  semi:
+    - error
+    - never
+  comma-dangle: off
+  no-unused-vars:
+    - error
+    - argsIgnorePattern: '^_'
+      varsIgnorePattern: '^_'
+  operator-linebreak:
+    - error
+    - before
+    - overrides:
+        '=': ignore
+  no-console: 2
+  no-plusplus: off
+  no-nested-ternary: off
+  arrow-body-style: off
+  consistent-return: off
+  curly:
+    - error
+    - all
+
+  # for post defining style object in react-native
+  no-use-before-define:
+    - error
+    - variables: false
+      functions: false
