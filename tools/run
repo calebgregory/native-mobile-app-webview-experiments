@@ -14,7 +14,7 @@ if [ ! -f "${DIR}/$1" ]; then
 fi
 
 # shellcheck disable=SC1091
-source "${DIR}/exports"
+source "${DIR}/config"
 
 echo "(>'')> running $1 $*"
 bash "${DIR}/$1" "$@"

@@ -1,6 +1,0 @@
-#!/bin/bash
-
-export S3_BUCKET_NAME="native-module-app-webview-experiments-webapp"
-
-# this is URL generated after you `./tools/run webapp_make_website`
-export WEBAPP_URL="http://${S3_BUCKET_NAME}.s3-website-us-east-1.amazonaws.com"

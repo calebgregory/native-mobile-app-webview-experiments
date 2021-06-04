@@ -4,3 +4,31 @@ aws s3 ls | grep "${S3_BUCKET_NAME}" \
   && echo "bucket already exists" && exit 0
 
 aws s3 mb "s3://${S3_BUCKET_NAME}"
+
+aws s3api put-public-access-block \
+    --bucket "${S3_BUCKET_NAME}" \
+    --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false" \
+    >/dev/null \
+    && echo 'made bucket public'
+
+aws s3api put-bucket-policy \
+    --bucket "${S3_BUCKET_NAME}" \
+    --policy "$(cat <<EOM
+{
+  "Id": "Policy1622758838905",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1622758835389",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::${S3_BUCKET_NAME}/*",
+      "Principal": "*"
+    }
+  ]
+}
+EOM
+)" >/dev/null \
+    && echo 'put public policy'

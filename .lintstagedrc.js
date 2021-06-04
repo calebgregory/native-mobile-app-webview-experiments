@@ -1,24 +1,27 @@
 const path = require('path')
 
-const abspath = (app) => path.resolve(path.join(__dirname, app))
+const abspath = app => path.resolve(path.join(__dirname, app))
 
 function genCommands(cmnd, files, passFilesAsArgs = false) {
-  const filesByApp = require('./package.json')._apps
-    .reduce((apps, app) => ({ ...apps, [abspath(app)]: new Set() }))
+  const filesByApp = require('./package.json')._apps.reduce((apps, app) => ({
+    ...apps,
+    [abspath(app)]: new Set(),
+  }))
 
   for (const file of files) {
-    for (const app in apps) {
+    for (const app in filesByApp) {
       if (file.startsWith(app)) {
-        apps[app].add(file)
+        filesByApp[app].add(file)
       }
     }
   }
 
   return Object.entries(filesByApp)
     .filter(([_app, files]) => files.size)
-    .map(([app, files]) => `${cmnd.replace('{dir}', app)}${
-      passFilesAsArgs ? ' '+files.join(' ') : ''
-    }`)
+    .map(
+      ([app, files]) =>
+        `${cmnd.replace('{dir}', app)}${passFilesAsArgs ? ' ' + Array.from(files).join(' ') : ''}`
+    )
 }
 
 // prettier-ignore
