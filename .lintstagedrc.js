@@ -30,7 +30,7 @@ module.exports = {
   '*.{js,jsx,ts,tsx}': [
     'prettier --write',
     'eslint --cache --fix',
-    filenames => genCommands('yarn --cwd {dir} test', filenames, true),
+    // filenames => genCommands('yarn --cwd {dir} test --ci --forceExit --passWithNoTests', filenames, false),
   ],
   '*.{json,md,mdx,yml,css}': [
     'prettier --write'

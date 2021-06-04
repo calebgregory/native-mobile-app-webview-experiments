@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from 'react';
-
-const KEY = 'item-key'
+import React from 'react'
+import { useObservableState } from 'observable-hooks'
+import { db, doc } from './db'
+import { mutateRxdb, Test } from './features/test'
 
 function App() {
-  const [value, setValue] = useState('')
-
-  const mutateLocalStorage = () => {
-    const val = new Date().toISOString()
-    setValue(val)
-    localStorage.setItem(KEY, val)
-  }
-
-  useEffect(() => {
-    setValue(localStorage.getItem(KEY) || '')
-  }, [])
+  const value = useObservableState(db().test.findOne().sort('-id').$.pipe(doc<Test>()))
 
   return (
     <div>
-      <button onClick={mutateLocalStorage}>Set value</button>
-      <p>Value: <code>{value}</code></p>
+      <button onClick={mutateRxdb}>Set value</button>
+      <p>
+        Value: <code>{value?.id || 'none'}</code>
+      </p>
     </div>
   )
 }

@@ -1,3 +1,22 @@
 #!/bin/bash
 
-aws s3 sync "${DIR}/../webapp/build" "s3://${S3_BUCKET_NAME}"
+aws s3 sync "${DIR}/../apps/web/build" "s3://${S3_BUCKET_NAME}"
+
+cloudfront_distribution_id="$(
+  aws cloudfront list-distributions \
+    | python -c "$(cat <<EOM
+import sys
+import json
+
+dists = json.load(sys.stdin)
+for dist in dists['DistributionList']['Items']:
+    origins = dist['Origins']['Items']
+    if any(['${S3_BUCKET_NAME}' in origin['Id'] for origin in origins]):
+        print(dist['Id'])
+EOM
+  )"
+)"
+
+aws cloudfront create-invalidation \
+  --distribution-id "${cloudfront_distribution_id}" \
+  --paths '/*'
