@@ -18,7 +18,7 @@
     "prettier": "^2.2.1"
   },
   "_apps": [
-    "nativeapp",
-    "webapp"
+    "apps/mobile",
+    "apps/web"
   ]
 }
