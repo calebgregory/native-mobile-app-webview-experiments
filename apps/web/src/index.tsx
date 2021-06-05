@@ -5,6 +5,7 @@ import App from './App'
 // import reportWebVitals from './reportWebVitals';
 
 import { init as initDB } from './db'
+import { init as initMsg } from './msg'
 import { init as initTest } from './features/test'
 
 async function main() {
@@ -15,7 +16,7 @@ async function main() {
     document.getElementById('root')
   )
 
-  await [initDB, initTest].reduce((prev, curr) => prev.then(curr), Promise.resolve())
+  await [initDB, initMsg, initTest].reduce((prev, curr) => prev.then(curr), Promise.resolve())
 
   ReactDOM.render(
     <React.StrictMode>
