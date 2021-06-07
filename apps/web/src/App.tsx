@@ -10,6 +10,8 @@ function App() {
 
   return (
     <div>
+      <h4>Camera:</h4>
+      <input type="file" accept="image/*,video/*" capture="camera" />
       <button onClick={mutateRxdb}>Set value</button>
       <p>
         Value: <code>{value?.id || 'none'}</code>

@@ -19,4 +19,5 @@ EOM
 
 aws cloudfront create-invalidation \
   --distribution-id "${cloudfront_distribution_id}" \
-  --paths '/*'
+  --paths '/*' \
+  | cat

@@ -76,6 +76,8 @@ true; // <- this is required`);
           source={{uri}}
           style={[styles.webview, styles.bumpDown]}
           onMessage={recvMessageFromWebView}
+          allowFileAccess={true}
+          ignoreSilentHardwareSwitch={true}
         />
 
         <Text style={[styles.title, styles.expl, styles.bumpDown]}>
